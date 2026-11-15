@@ -1,0 +1,218 @@
+{
+  "runs": [
+    {
+      "run_id": "20261116-000221",
+      "topic": "Introduction to RAG (Retrieval-Augmented Generation)",
+      "passed": false,
+      "attempts": 3,
+      "failed_by_attempt": [
+        [
+          "length",
+          "acronym_expanded",
+          "jargon_defined"
+        ],
+        [
+          "length",
+          "jargon_defined"
+        ],
+        [
+          "length",
+          "jargon_defined"
+        ]
+      ]
+    },
+    {
+      "run_id": "20261116-000946",
+      "topic": "Introduction to RAG (Retrieval-Augmented Generation)",
+      "passed": true,
+      "attempts": 3,
+      "failed_by_attempt": [
+        [
+          "length",
+          "acronym_expanded",
+          "jargon_defined"
+        ],
+        [
+          "sentence_length",
+          "jargon_defined"
+        ],
+        []
+      ]
+    },
+    {
+      "run_id": "20261116-005306",
+      "topic": "Introduction to RAG (Retrieval-Augmented Generation)",
+      "passed": false,
+      "attempts": 3,
+      "failed_by_attempt": [
+        [
+          "length",
+          "sentence_length",
+          "acronym_expanded",
+          "jargon_defined"
+        ],
+        [
+          "length",
+          "jargon_defined"
+        ],
+        [
+          "sentence_length"
+        ]
+      ]
+    }
+  ],
+  "failure_counts": {
+    "jargon_defined": 3,
+    "length": 3,
+    "acronym_expanded": 3,
+    "sentence_length": 2
+  },
+  "failures": [
+    {
+      "check_id": "length",
+      "reason": "Too long: 1163 words (maximum 1000).",
+      "run_id": "20261116-000221",
+      "attempt": 1
+    },
+    {
+      "check_id": "acronym_expanded",
+      "reason": "'RAG' is used before it is expanded.",
+      "run_id": "20261116-000221",
+      "attempt": 1
+    },
+    {
+      "check_id": "jargon_defined",
+      "reason": "Used without a plain-words explanation at first appearance: embedding, training data.",
+      "run_id": "20261116-000221",
+      "attempt": 1
+    },
+    {
+      "check_id": "length",
+      "reason": "Too long: 1112 words (maximum 1000).",
+      "run_id": "20261116-000221",
+      "attempt": 2
+    },
+    {
+      "check_id": "jargon_defined",
+      "reason": "Used without a plain-words explanation at first appearance: embedding, vector database, chunk, training data.",
+      "run_id": "20261116-000221",
+      "attempt": 2
+    },
+    {
+      "check_id": "length",
+      "reason": "Too long: 1055 words (maximum 1000).",
+      "run_id": "20261116-000221",
+      "attempt": 3
+    },
+    {
+      "check_id": "jargon_defined",
+      "reason": "Used without a plain-words explanation at first appearance: vector database, chunk.",
+      "run_id": "20261116-000221",
+      "attempt": 3
+    },
+    {
+      "check_id": "length",
+      "reason": "Too long: 1018 words (maximum 1000).",
+      "run_id": "20261116-000946",
+      "attempt": 1
+    },
+    {
+      "check_id": "acronym_expanded",
+      "reason": "'RAG' is used before it is expanded.",
+      "run_id": "20261116-000946",
+      "attempt": 1
+    },
+    {
+      "check_id": "jargon_defined",
+      "reason": "Used without a plain-words explanation at first appearance: training data.",
+      "run_id": "20261116-000946",
+      "attempt": 1
+    },
+    {
+      "check_id": "sentence_length",
+      "reason": "A sentence has 32 words (max 25).",
+      "run_id": "20261116-000946",
+      "attempt": 2
+    },
+    {
+      "check_id": "jargon_defined",
+      "reason": "Used without a plain-words explanation at first appearance: retrieval.",
+      "run_id": "20261116-000946",
+      "attempt": 2
+    },
+    {
+      "check_id": "length",
+      "reason": "Too long: 1080 words (maximum 1000).",
+      "run_id": "20261116-005306",
+      "attempt": 1
+    },
+    {
+      "check_id": "sentence_length",
+      "reason": "A sentence has 32 words (max 25).",
+      "run_id": "20261116-005306",
+      "attempt": 1
+    },
+    {
+      "check_id": "acronym_expanded",
+      "reason": "'RAG' is used before it is expanded.",
+      "run_id": "20261116-005306",
+      "attempt": 1
+    },
+    {
+      "check_id": "jargon_defined",
+      "reason": "Used without a plain-words explanation at first appearance: embedding, chunk, training data.",
+      "run_id": "20261116-005306",
+      "attempt": 1
+    },
+    {
+      "check_id": "length",
+      "reason": "Too long: 1043 words (maximum 1000).",
+      "run_id": "20261116-005306",
+      "attempt": 2
+    },
+    {
+      "check_id": "jargon_defined",
+      "reason": "Used without a plain-words explanation at first appearance: embedding.",
+      "run_id": "20261116-005306",
+      "attempt": 2
+    },
+    {
+      "check_id": "sentence_length",
+      "reason": "A sentence has 27 words (max 25).",
+      "run_id": "20261116-005306",
+      "attempt": 3
+    }
+  ],
+  "guidelines": [
+    {
+      "text": "Define every new technical term in plain words in the same sentence where you first use it.",
+      "check_id": "jargon_defined",
+      "source": "auto-evolve",
+      "at": "2026-11-16 00:11:48"
+    },
+    {
+      "text": "Stay within 450-1000 words. Cut all side-topics and non-essential content to strictly meet the 1000-word maximum.",
+      "check_id": "length",
+      "source": "auto-evolve",
+      "at": "2026-11-16 00:11:53"
+    },
+    {
+      "text": "In the first sentence an acronym appears, expand it fully (e.g., RAG stands for Retrieval-Augmented Generation).",
+      "check_id": "acronym_expanded",
+      "source": "auto-evolve",
+      "at": "2026-11-16 00:12:08"
+    }
+  ],
+  "human_feedback": [
+    {
+      "text": "Keep the lesson between 700 and 950 words. Define vector database and chunk in the same sentence where each first appears, even in the introduction.",
+      "run_id": null,
+      "at": "2026-11-16 00:09:41"
+    }
+  ],
+  "evolve_marker": {
+    "jargon_defined": 2,
+    "length": 2,
+    "acronym_expanded": 2
+  }
+}

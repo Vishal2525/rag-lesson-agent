@@ -1,0 +1,155 @@
+# Rubric v1. Every checkpoint is a hard PASS/FAIL. No scores, no partial credit.
+# A lesson ships only if ALL checkpoints pass.
+#
+# type: code -> deterministic Python check (cheap, repeatable, cannot be sweet-talked)
+# type: llm  -> judged by a separate LLM call, grounded in facts/rag_facts.md
+#
+# Rubric changes are made by a human. The system may *propose* changes
+# (memory/rubric_proposals.md) but never edits this file, so it cannot lower its own bar.
+version: 1
+
+checkpoints:
+  # ---------------- covers the key points + coherent flow (structure) ----------------
+  - id: structure
+    dimension: covers_key_points
+    type: code
+    fn: structure
+    requirement: "Has separate sections for: what RAG is, why it matters, how it works, a worked example, limits, and a recap."
+    fix_hint: "Add a clearly titled section for every missing part. Use headings such as 'What is RAG?', 'Why do we need RAG?', 'How does RAG work?', 'Example', 'Limits of RAG', 'Quick recap'."
+    params:
+      required_sections:
+        what: '\bwhat\b'
+        why: '\bwhy\b'
+        how: '\bhow\b'
+        example: 'example'
+        limits: 'limit|not magic'
+        recap: 'recap|summary|remember'
+
+  - id: length
+    dimension: beginner_friendly
+    type: code
+    fn: length
+    requirement: "Between 450 and 1000 words: complete enough to teach, short enough for a beginner to finish."
+    fix_hint: "Add the missing explanation if too short; cut side-topics if too long."
+    params: {min_words: 450, max_words: 1000}
+
+  # ---------------- beginner-friendly language ----------------
+  - id: sentence_length
+    dimension: beginner_friendly
+    type: code
+    fn: sentence_length
+    requirement: "Short sentences: average at most 15 words, and no sentence longer than 25 words."
+    fix_hint: "Split long sentences. One idea per sentence."
+    params: {max_avg_words: 15, max_sentence_words: 25}
+
+  - id: reading_ease
+    dimension: beginner_friendly
+    type: code
+    fn: reading_ease
+    requirement: "Flesch Reading Ease of at least 60 (plain English a school student can read)."
+    fix_hint: "Use shorter, everyday words. Replace words like 'utilize', 'subsequently', 'approximately' with 'use', 'then', 'about'."
+    params: {min_flesch: 60}
+
+  - id: long_words
+    dimension: beginner_friendly
+    type: code
+    fn: long_words
+    requirement: "At most 3% of words have 12 or more letters (hard for non-native readers)."
+    fix_hint: "Replace long, formal words with short common ones."
+    params: {max_ratio: 0.03, min_letters: 12}
+
+  # ---------------- clear, no unexplained jargon ----------------
+  - id: acronym_expanded
+    dimension: no_unexplained_jargon
+    type: code
+    fn: acronym_expanded
+    requirement: "The first sentence that uses 'RAG' also says what it stands for (Retrieval-Augmented Generation)."
+    fix_hint: "In the first sentence that uses 'RAG', write: RAG stands for Retrieval-Augmented Generation."
+    params: {acronym: 'RAG', expansion: 'retrieval-augmented generation'}
+
+  - id: jargon_defined
+    dimension: no_unexplained_jargon
+    type: code
+    fn: jargon_defined
+    requirement: "Every technical term is explained in the same sentence where it first appears (safety net for the LLM check below)."
+    fix_hint: "At the first use of each technical term, define it in plain words in that same sentence, e.g. 'Each piece is called a chunk.'"
+    params:
+      terms:
+        LLM: '\bLLMs?\b'
+        embedding: 'embedding'
+        vector database: 'vector (database|store)'
+        chunk: '\bchunks?\b'
+        retrieval: 'retriev'
+        hallucination: 'hallucinat'
+        prompt: '\bprompts?\b'
+        token: '\btokens?\b'
+        training data: 'training data'
+        fine-tuning: 'fine-?tun'
+        context window: 'context window'
+        semantic: 'semantic'
+        parameters: '\bparameters?\b'
+        neural network: 'neural network'
+
+  # ---------------- LLM-judged checkpoints ----------------
+  - id: accurate_grounded
+    dimension: accurate_grounded
+    type: llm
+    requirement: "Every claim is consistent with the fact sheet. No invented numbers, names, or capabilities."
+    question: "Does any statement in the lesson contradict the fact sheet, or state a specific fact (number, date, name, benchmark) that is not supported by it?"
+    pass_if: "No contradictions and no unsupported specific claims."
+    fail_if: "Any contradiction (for example saying RAG retrains the model, or that it guarantees correct answers) or any invented specific."
+    fix_hint: "Remove or correct the wrong claim. Stay inside the facts given."
+
+  - id: covers_key_points
+    dimension: covers_key_points
+    type: llm
+    requirement: "Covers all seven key points K1-K7 from the fact sheet, in beginner-friendly form."
+    question: "Does the lesson clearly teach each of K1, K2, K3, K4, K5, K6, K7 from the fact sheet?"
+    pass_if: "All seven are taught clearly (wording may differ)."
+    fail_if: "Any key point is missing, only name-dropped without explanation, or wrong. List the missing ids in the reason."
+    fix_hint: "Add a short, clear explanation for each missing key point."
+
+  - id: teaches_by_example
+    dimension: teaches_by_example
+    type: llm
+    requirement: "Contains a concrete, step-by-step worked example that follows one question through the whole RAG process."
+    question: "Is there a concrete worked example (a specific question, specific retrieved text, a specific final answer) that walks through the RAG steps in order?"
+    pass_if: "A specific question is followed step by step to a specific answer."
+    fail_if: "Only abstract description, or an example that skips the retrieval step."
+    fix_hint: "Add a worked example with a real-looking question, the chunk that gets found, and the final answer."
+
+  - id: analogy_sound
+    dimension: teaches_by_example
+    type: llm
+    requirement: "Uses one everyday analogy that is accurate and does not mislead."
+    question: "Is there an everyday analogy (something from daily life) that helps explain RAG, and is it accurate (it does not imply something false, such as the model being retrained)?"
+    pass_if: "An analogy exists and maps correctly onto retrieve-then-answer."
+    fail_if: "No analogy, or the analogy implies something false."
+    fix_hint: "Add a simple analogy such as an open-book exam, and make sure it matches how RAG really works."
+
+  - id: jargon_explained
+    dimension: no_unexplained_jargon
+    type: llm
+    requirement: "A reader with limited English and no AI background could follow every term; each technical word is explained in plain words before it is relied on."
+    question: "Is there any technical or difficult word that is used without a plain-language explanation first (including words a non-native English reader may not know)?"
+    pass_if: "Every technical term and hard word is explained, or avoidable words are replaced with simple ones."
+    fail_if: "Any unexplained technical term or hard word. Name it in the reason."
+    fix_hint: "Explain the term in plain words at first use, or replace it with a simpler word."
+
+  - id: coherent_flow
+    dimension: coherent_flow
+    type: llm
+    requirement: "Teaching order builds step by step: problem -> idea -> how it works -> example -> limits -> recap. No idea is used before it is introduced."
+    question: "Does each section build on the previous one in a sensible order, without using an idea before it has been introduced?"
+    pass_if: "Logical order; each part prepares the next."
+    fail_if: "Sections out of order, a concept used before it is introduced, or abrupt jumps."
+    fix_hint: "Reorder sections: problem, idea, how it works, example, limits, recap. Introduce each idea before using it."
+
+  - id: zero_background
+    dimension: coherent_flow
+    type: llm
+    requirement: "Standalone: assumes no knowledge of AI, machine learning, programming or maths."
+    question: "Does the lesson assume any prior knowledge (of AI, machine learning, coding, or maths) that a learner starting from zero would not have?"
+    pass_if: "Nothing is assumed beyond everyday knowledge."
+    fail_if: "Relies on prior knowledge, or refers to other lessons or outside material to be understood."
+    fix_hint: "Explain the missing background in one or two simple sentences, or remove the reference."

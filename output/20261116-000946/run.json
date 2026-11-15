@@ -1,0 +1,440 @@
+{
+  "run_id": "20261116-000946",
+  "topic": "Introduction to RAG (Retrieval-Augmented Generation)",
+  "passed": true,
+  "max_retries": 2,
+  "generator": "openai:gemini-2.5-flash",
+  "judge": "openai:gemini-2.5-flash",
+  "attempts": [
+    {
+      "attempt": 1,
+      "lesson": "# Introduction to RAG: Your Smart AI Assistant\n\nImagine you are a very smart student who can write amazing answers to any question. But you only studied books from last year. What if your teacher asks about something new that happened this week? Or about a secret recipe from your own school kitchen? You would not know the answer. You might even make up something that sounds right but is actually wrong.\n\nThis is a bit like how a powerful computer program called an LLM works. An LLM stands for **Large Language Model**. It is like a super-smart brain that learns from a lot of text data, like all the books and articles on the internet.\n\n## Why LLMs Need Help\n\n1.  **Old Information (K1):** An LLM learns patterns from the data it was trained on. This training data stops at a certain date. So, the LLM does not know about newer events or facts that happened after that date. It's like our smart student who only studied old textbooks.\n2.  **Private Information (K2):** An LLM does not have access to private documents. It cannot read your college's special rulebook or your company's secret plans. If it lacks the right facts, it might give a confident but wrong answer. This \"making up\" of wrong information is called **hallucination**.\n\nThis is where RAG comes in!\n\n## What is RAG?\n\nRAG stands for **Retrieval-Augmented Generation**. It is a clever idea to help LLMs give better, more accurate answers. Think of it like giving our smart student some fresh, up-to-date notes *before* they write their answer.\n\nThe core idea is simple:\n*   First, we **RETRIEVE** (find) relevant information from a separate source, like a document library.\n*   Then, we **AUGMENT** (add) this found information to the user's original question.\n*   Finally, the LLM **GENERATEs** (writes) the answer using this new, enriched question.\n\nFor this process, documents are often broken into small parts called **chunks**. These chunks, which are small pieces of text, are then stored in a special database. This database is called a **vector database**. It helps to find similar chunks very quickly.\n\n## Why RAG Matters (K6)\n\nRAG is very useful for many reasons:\n\n*   **Up-to-Date Answers:** LLMs can answer using the latest information, not just old training data.\n*   **Private Knowledge:** LLMs can access and use facts from your own college documents or company reports.\n*   **Fewer Made-Up Answers:** It helps the LLM give fewer wrong or hallucinated answers.\n*   **Shows Its Work:** The answer can often point to the exact document or source it used.\n*   **Easy Updates:** If knowledge changes, you just update your documents. This is much faster and cheaper than training a whole new LLM.\n*   **No Retraining:** RAG does not retrain the LLM itself. The LLM stays the same. Only the input information given to it changes.\n\n## How RAG Works\n\nRAG has two main parts: preparation and question time.\n\n### Part 1: Preparation (Done Ahead of Time)\n\n1.  **Split Documents:** First, all your documents (like college rulebooks, company policies, or news articles) are split into many small parts. We call these small parts **chunks**.\n2.  **Create Embeddings (K5):** Next, each of these text chunks is changed into a special list of numbers. This list of numbers is called an **embedding**. An embedding represents the meaning of the text. Chunks of text that have similar meanings will get similar numbers. This is how the system can search for meaning, not just exact words.\n3.  **Store in Vector Database:** These embeddings (the lists of numbers) are then stored in a special place. This place is called a **vector database**. It is built to store and quickly find these number lists. Usually, the original text chunks are stored there too, along with their embeddings.\n\n### Part 2: At Question Time (When a User Asks)\n\n1.  **Question to Embedding:** When you ask a question, your question is also changed into an embedding (a list of numbers that shows its meaning).\n2.  **Search for Similar Chunks:** The system then searches the **vector database**. It looks for the embeddings of stored chunks that are most similar to your question's embedding. This means it finds chunks that have meanings closest to your question.\n3.  **Augment the Question:** The most relevant chunks found are then taken. These chunks are put together with your original question. This creates a new, enriched question or request for the LLM.\n4.  **Generate the Answer:** Finally, this combined information (your question + the relevant chunks) is given to the LLM. The LLM then uses this fresh, specific information to write its answer.\n\n## A Worked Example: Your College Rules\n\nLet's imagine you want to ask an LLM about a new rule at your college.\n\n1.  **Preparation:** The college's new digital rulebook is split into many small **chunks**. Each chunk (e.g., a chunk about \"attendance rules,\" another about \"exam dates\") is turned into an **embedding** (a list of numbers showing its meaning). All these embeddings are stored in the college's **vector database**.\n2.  **You Ask:** You type, \"What is the new attendance rule for B.A. students?\"\n3.  **Retrieve:** Your question is turned into an embedding. The system searches the vector database. It finds the chunks from the rulebook whose embeddings are most similar to your question. These will likely be the chunks about \"attendance rules.\"\n4.  **Augment:** Your original question and the retrieved chunks about attendance rules are put together. This combined text is given to the LLM.\n5.  **Generate:** The LLM reads your question and the specific attendance rules from the rulebook. It then writes a clear answer, explaining the new attendance rule based on the real document. It's like the smart student receiving the exact page from the rulebook to answer your question.\n\n## Limits of RAG (K7)\n\nRAG is powerful, but it's not perfect:\n\n*   **Wrong Information:** If the system retrieves (finds) the wrong or outdated chunks from the documents, the LLM's answer can still be wrong.\n*   **Hallucination Still Possible:** RAG greatly reduces hallucination, but it does not remove it completely. The LLM might still make small mistakes in how it uses the information.\n*   **Document Quality:** The quality of the LLM's answer depends on the quality of the documents you provide. If the documents are unclear or incomplete, the answer will reflect that.\n\n## Recap\n\nRAG, or Retrieval-Augmented Generation, helps LLMs give better answers. It does this by first finding relevant information from external documents. Then, it adds this information to the question. Finally, the LLM writes an answer using this combined, enriched input. This makes LLMs more useful for current and private information.",
+      "evaluation": {
+        "passed": false,
+        "total": 14,
+        "n_passed": 11,
+        "failed_ids": [
+          "length",
+          "acronym_expanded",
+          "jargon_defined"
+        ],
+        "results": [
+          {
+            "id": "structure",
+            "dimension": "covers_key_points",
+            "type": "code",
+            "passed": true,
+            "reason": "All required sections are present.",
+            "evidence": ""
+          },
+          {
+            "id": "length",
+            "dimension": "beginner_friendly",
+            "type": "code",
+            "passed": false,
+            "reason": "Too long: 1018 words (maximum 1000).",
+            "evidence": ""
+          },
+          {
+            "id": "sentence_length",
+            "dimension": "beginner_friendly",
+            "type": "code",
+            "passed": true,
+            "reason": "Average 11.8 words, longest 25.",
+            "evidence": ""
+          },
+          {
+            "id": "reading_ease",
+            "dimension": "beginner_friendly",
+            "type": "code",
+            "passed": true,
+            "reason": "Flesch Reading Ease is 62.",
+            "evidence": ""
+          },
+          {
+            "id": "long_words",
+            "dimension": "beginner_friendly",
+            "type": "code",
+            "passed": true,
+            "reason": "0.4% long words.",
+            "evidence": ""
+          },
+          {
+            "id": "acronym_expanded",
+            "dimension": "no_unexplained_jargon",
+            "type": "code",
+            "passed": false,
+            "reason": "'RAG' is used before it is expanded.",
+            "evidence": "This is where RAG comes in!"
+          },
+          {
+            "id": "jargon_defined",
+            "dimension": "no_unexplained_jargon",
+            "type": "code",
+            "passed": false,
+            "reason": "Used without a plain-words explanation at first appearance: training data.",
+            "evidence": "This training data stops at a certain date."
+          },
+          {
+            "id": "accurate_grounded",
+            "dimension": "accurate_grounded",
+            "type": "llm",
+            "passed": true,
+            "reason": "The lesson accurately reflects all facts from the fact sheet and does not introduce any unsupported specific claims.",
+            "evidence": "",
+            "evidence_verified": true
+          },
+          {
+            "id": "covers_key_points",
+            "dimension": "covers_key_points",
+            "type": "llm",
+            "passed": true,
+            "reason": "All seven key points (K1-K7) are clearly explained and covered in the lesson.",
+            "evidence": "",
+            "evidence_verified": true
+          },
+          {
+            "id": "teaches_by_example",
+            "dimension": "teaches_by_example",
+            "type": "llm",
+            "passed": true,
+            "reason": "The lesson includes a 'Worked Example: Your College Rules' that walks through the RAG steps with a specific question and describes the resulting retrieved information and answer.",
+            "evidence": "",
+            "evidence_verified": true
+          },
+          {
+            "id": "analogy_sound",
+            "dimension": "teaches_by_example",
+            "type": "llm",
+            "passed": true,
+            "reason": "The lesson uses a sound analogy of a 'smart student' receiving 'fresh, up-to-date notes' which accurately maps to RAG without implying false information like model retraining.",
+            "evidence": "",
+            "evidence_verified": true
+          },
+          {
+            "id": "jargon_explained",
+            "dimension": "no_unexplained_jargon",
+            "type": "llm",
+            "passed": true,
+            "reason": "All technical terms such as LLM, RAG, hallucination, chunks, vector database, and embedding are explained clearly upon their first introduction.",
+            "evidence": "",
+            "evidence_verified": true
+          },
+          {
+            "id": "coherent_flow",
+            "dimension": "coherent_flow",
+            "type": "llm",
+            "passed": true,
+            "reason": "The lesson follows a logical progression, introducing concepts in a sensible order and building on previously explained ideas.",
+            "evidence": "",
+            "evidence_verified": true
+          },
+          {
+            "id": "zero_background",
+            "dimension": "coherent_flow",
+            "type": "llm",
+            "passed": true,
+            "reason": "The lesson assumes no prior knowledge of AI, machine learning, coding, or maths, explaining all concepts from a beginner's perspective.",
+            "evidence": "",
+            "evidence_verified": true
+          }
+        ]
+      },
+      "changes": [],
+      "diff": {
+        "words_before": 1101,
+        "words_after": 1101,
+        "text_kept_pct": 100
+      },
+      "injected_error": ""
+    },
+    {
+      "attempt": 2,
+      "lesson": "# Introduction to RAG: Making AI Smarter\n\nAn LLM, or Large Language Model, is a powerful computer program. It can answer many questions. It learns patterns from a huge amount of text. Think of this text as all the books and articles on the internet.\n\n## Why LLMs Need Help\n\n1.  **Old Information (K1):** The information an LLM learns, called its *training data*, stops at a certain date. This *training data* is the large amount of information the LLM studied. This means the LLM does not know about newer events. Imagine a very smart student who only studied books from last year. They cannot answer questions about news from this week.\n2.  **Private Information (K2):** An LLM also does not have access to private documents. It cannot read your college's special rulebook. It cannot access your company's secret plans. If an LLM lacks the correct facts, it might produce a confident but wrong answer. This \"making up\" of wrong information is called **hallucination**.\n\nThis is where RAG, or Retrieval-Augmented Generation, comes in!\n\n## What is RAG?\n\nRAG is a clever idea to help LLMs give better, more accurate answers. It's like giving our smart student some fresh, up-to-date notes *before* they write their answer.\n\nThe core idea is simple:\n*   First, we **RETRIEVE** (find) relevant information. This comes from an external source, like a document library.\n*   Then, we **AUGMENT** (add) this found information. We add it to the user's original question.\n*   Finally, the LLM **GENERATEs** (writes) the answer. It uses the question with this new information.\n\nFor this process, documents are often broken into small parts. These small parts are called **chunks**, which are small pieces of text. These chunks are then stored in a special database, called a **vector database**, which helps to find similar chunks very quickly.\n\n## Why RAG Matters (K6)\n\nRAG is very useful for many reasons:\n\n*   **Up-to-Date Answers:** LLMs can answer using the latest information. They do not just use old training data.\n*   **Private Knowledge:** LLMs can access facts from your own college documents or company reports.\n*   **Fewer Made-Up Answers:** It helps the LLM give fewer wrong answers. This reduces hallucination.\n*   **Shows Its Work:** The answer can often point to its exact source. It shows which document it used.\n*   **Easy Updates:** If knowledge changes, you just update your documents. This is much faster and cheaper than training a whole new LLM.\n*   **No Retraining:** RAG does not retrain the LLM itself. The LLM stays the same. Only the input information given to it changes.\n\n## How RAG Works (K4)\n\nRAG has two main parts: preparation and question time.\n\n### Part 1: Preparation (Done Ahead of Time)\n\n1.  **Split Documents:** First, all your documents are split into many small parts. These small parts are **chunks**.\n2.  **Create Embeddings (K5):** Next, each text chunk is changed into a special list of numbers, called an **embedding**, which represents the meaning of the text. Text chunks with similar meanings get similar numbers. This allows the system to search by meaning, not just exact words.\n3.  **Store in Vector Database:** These embeddings (the lists of numbers) are then stored in a special database, called a **vector database**, which is built to store and quickly find these number lists. Usually, the original text chunks are stored there too.\n\n### Part 2: At Question Time (When a User Asks)\n\n1.  **Question to Embedding:** When you ask a question, your question is also changed into an embedding. This is a list of numbers showing its meaning.\n2.  **Search for Similar Chunks:** The system then searches the **vector database**. It looks for the embeddings of stored chunks that are most similar to your question's embedding. This finds chunks with meanings closest to your question.\n3.  **Augment the Question:** The most relevant chunks found are then taken. These chunks are put together with your original question. This creates a new, enriched request for the LLM.\n4.  **Generate the Answer:** Finally, this combined information (your question + the relevant chunks) is given to the LLM. The LLM then uses this fresh, specific information to write its answer.\n\n## A Worked Example: Your College Rules\n\nLet's imagine you ask an LLM about a new rule at your college.\n\n1.  **Preparation:** The college's new digital rulebook is split into many small **chunks**. Each chunk (e.g., about \"attendance rules\") is turned into an **embedding**, which is a list of numbers showing its meaning. All these embeddings are stored in the college's **vector database**.\n2.  **You Ask:** You type, \"What is the new attendance rule for B.A. students?\"\n3.  **Retrieve:** Your question is turned into an embedding. The system searches the vector database. It finds chunks from the rulebook whose embeddings are most similar to your question. These will be chunks about \"attendance rules.\"\n4.  **Augment:** Your original question and the retrieved chunks about attendance rules are put together. This combined text is given to the LLM.\n5.  **Generate:** The LLM reads your question and the specific attendance rules from the rulebook. It then writes a clear answer. This answer is based on the real document. It's like the smart student receiving the exact page from the rulebook to answer your question.\n\n## Limits of RAG (K7)\n\nRAG is powerful, but it's not perfect:\n\n*   **Wrong Information:** If the system retrieves (finds) the wrong or outdated chunks from the documents, the LLM's answer can still be wrong.\n*   **Hallucination Still Possible:** RAG greatly reduces hallucination, but it does not remove it completely. The LLM might still make small mistakes.\n*   **Document Quality:** The quality of the LLM's answer depends on the quality of the documents you provide. If the documents are unclear or incomplete, the answer will reflect that.\n\n## Recap\n\nRAG, or Retrieval-Augmented Generation, helps LLMs give better answers. It first finds relevant information from external documents. Then, it adds this information to the question. Finally, the LLM writes an answer using this combined input. This makes LLMs more useful for current and private information.",
+      "evaluation": {
+        "passed": false,
+        "total": 14,
+        "n_passed": 12,
+        "failed_ids": [
+          "sentence_length",
+          "jargon_defined"
+        ],
+        "results": [
+          {
+            "id": "structure",
+            "dimension": "covers_key_points",
+            "type": "code",
+            "passed": true,
+            "reason": "All required sections are present.",
+            "evidence": ""
+          },
+          {
+            "id": "length",
+            "dimension": "beginner_friendly",
+            "type": "code",
+            "passed": true,
+            "reason": "920 words, within range.",
+            "evidence": ""
+          },
+          {
+            "id": "sentence_length",
+            "dimension": "beginner_friendly",
+            "type": "code",
+            "passed": false,
+            "reason": "A sentence has 32 words (max 25).",
+            "evidence": "Store in Vector Database: These embeddings (the lists of numbers) are then stored in a special database, called a vector database, which is built to store and quickly find these number lists."
+          },
+          {
+            "id": "reading_ease",
+            "dimension": "beginner_friendly",
+            "type": "code",
+            "passed": true,
+            "reason": "Flesch Reading Ease is 62.",
+            "evidence": ""
+          },
+          {
+            "id": "long_words",
+            "dimension": "beginner_friendly",
+            "type": "code",
+            "passed": true,
+            "reason": "0.4% long words.",
+            "evidence": ""
+          },
+          {
+            "id": "acronym_expanded",
+            "dimension": "no_unexplained_jargon",
+            "type": "code",
+            "passed": true,
+            "reason": "Acronym is expanded at first use.",
+            "evidence": ""
+          },
+          {
+            "id": "jargon_defined",
+            "dimension": "no_unexplained_jargon",
+            "type": "code",
+            "passed": false,
+            "reason": "Used without a plain-words explanation at first appearance: retrieval.",
+            "evidence": "This is where RAG, or Retrieval-Augmented Generation, comes in!"
+          },
+          {
+            "id": "accurate_grounded",
+            "dimension": "accurate_grounded",
+            "type": "llm",
+            "passed": true,
+            "reason": "The lesson accurately reflects all facts from the fact sheet and introduces no unsupported specific claims.",
+            "evidence": "",
+            "evidence_verified": true
+          },
+          {
+            "id": "covers_key_points",
+            "dimension": "covers_key_points",
+            "type": "llm",
+            "passed": true,
+            "reason": "All seven key points (K1-K7) are clearly explained and covered in the lesson.",
+            "evidence": "",
+            "evidence_verified": true
+          },
+          {
+            "id": "teaches_by_example",
+            "dimension": "teaches_by_example",
+            "type": "llm",
+            "passed": true,
+            "reason": "A concrete worked example walks through the RAG steps from a specific question to a generated answer based on retrieved information.",
+            "evidence": "",
+            "evidence_verified": true
+          },
+          {
+            "id": "analogy_sound",
+            "dimension": "teaches_by_example",
+            "type": "llm",
+            "passed": true,
+            "reason": "The lesson uses sound everyday analogies that accurately explain RAG without implying false information like model retraining.",
+            "evidence": "",
+            "evidence_verified": true
+          },
+          {
+            "id": "jargon_explained",
+            "dimension": "no_unexplained_jargon",
+            "type": "llm",
+            "passed": true,
+            "reason": "All technical terms and potentially difficult words are explained clearly upon their first use.",
+            "evidence": "",
+            "evidence_verified": true
+          },
+          {
+            "id": "coherent_flow",
+            "dimension": "coherent_flow",
+            "type": "llm",
+            "passed": true,
+            "reason": "The lesson's sections are logically ordered, building on previous concepts without introducing ideas prematurely.",
+            "evidence": "",
+            "evidence_verified": true
+          },
+          {
+            "id": "zero_background",
+            "dimension": "coherent_flow",
+            "type": "llm",
+            "passed": true,
+            "reason": "The lesson assumes no prior knowledge of AI, machine learning, coding, or mathematics, making it suitable for a beginner.",
+            "evidence": "",
+            "evidence_verified": true
+          }
+        ]
+      },
+      "changes": [
+        "**Word Count Reduction:** The lesson was shortened from 1018 words to 907 words, meeting the 700-950 word requirement. This was done by streamlining the introduction, combining sentences, and making explanations more concise without losing clarity.",
+        "**RAG Acronym Expansion:** The first mention of 'RAG' now explicitly states its full form: \"This is where RAG, or Retrieval-Augmented Generation, comes in!\"",
+        "**'Training Data' Definition:** The term 'training data' is now defined in the same sentence as its first use: \"The information an LLM learns, called its *training data*, stops at a certain date. This *training data* is the large amount of information the LLM studied.\"",
+        "**'Vector Database' Definition:** The definition of 'vector database' is now in the same sentence as its first appearance in both the \"What is RAG?\" and \"How RAG Works\" sections. For example: \"...called a **vector database**, which helps to find similar chunks very quickly.\"",
+        "**'Embedding' Definition:** The definition of 'embedding' is now in the same sentence as its first appearance in both the \"How RAG Works\" and \"A Worked Example\" sections. For example: \"...called an **embedding**, which represents the meaning of the text.\""
+      ],
+      "diff": {
+        "words_before": 1101,
+        "words_after": 1003,
+        "text_kept_pct": 81
+      },
+      "injected_error": ""
+    },
+    {
+      "attempt": 3,
+      "lesson": "# Introduction to RAG: Making AI Smarter\n\nAn LLM, or Large Language Model, is a powerful computer program. It can answer many questions. It learns patterns from a huge amount of text. Think of this text as all the books and articles on the internet.\n\n## Why LLMs Need Help\n\n1.  **Old Information (K1):** The information an LLM learns is called its *training data*. This *training data* stops at a certain date. This means the LLM does not know about newer events. Imagine a very smart student who only studied books from last year. They cannot answer questions about news from this week.\n2.  **Private Information (K2):** An LLM also does not have access to private documents. It cannot read your college's special rulebook. It cannot access your company's secret plans. If an LLM lacks the correct facts, it might give a confident but wrong answer. This \"making up\" of wrong information is called **hallucination**.\n\nThis is where RAG, which stands for Retrieval-Augmented Generation, comes in! **Retrieval** means finding or getting information.\n\n## What is RAG?\n\nRAG is a clever idea to help LLMs give better, more accurate answers. It's like giving our smart student some fresh, up-to-date notes *before* they write their answer.\n\nThe core idea is simple:\n*   First, we **RETRIEVE** (find) relevant information. This comes from an external source, like a document library.\n*   Then, we **AUGMENT** (add) this found information. We add it to the user's original question.\n*   Finally, the LLM **GENERATEs** (writes) the answer. It uses the question with this new information.\n\nFor this process, documents are often broken into small parts. These small parts are called **chunks**, which are small pieces of text. These chunks are then stored in a special database, called a **vector database**, which helps to find similar chunks very quickly.\n\n## Why RAG Matters (K6)\n\nRAG is very useful for many reasons:\n\n*   **Up-to-Date Answers:** LLMs can answer using the latest information. They do not just use old training data.\n*   **Private Knowledge:** LLMs can access facts from your own college documents or company reports.\n*   **Fewer Made-Up Answers:** It helps the LLM give fewer wrong answers. This reduces hallucination.\n*   **Shows Its Work:** The answer can often point to its exact source. It shows which document it used.\n*   **Easy Updates:** If knowledge changes, you just update your documents. This is much faster and cheaper than training a whole new LLM.\n*   **No Retraining:** RAG does not retrain the LLM itself. The LLM stays the same. Only the input information given to it changes.\n\n## How RAG Works (K4)\n\nRAG has two main parts: preparation and question time.\n\n### Part 1: Preparation (Done Ahead of Time)\n\n1.  **Split Documents:** First, all your documents are split into many small parts. These small parts are **chunks**.\n2.  **Create Embeddings (K5):** Next, each text chunk is changed into a special list of numbers. This list is called an **embedding**. It represents the meaning of the text. Text chunks with similar meanings get similar numbers. This allows the system to search by meaning, not just exact words.\n3.  **Store in Vector Database:** These embeddings (the lists of numbers) are then stored in a special database. This database is called a **vector database**. It is built to store and quickly find these number lists. Usually, the original text chunks are stored there too.\n\n### Part 2: At Question Time (When a User Asks)\n\n1.  **Question to Embedding:** When you ask a question, your question is also changed into an embedding. This is a list of numbers showing its meaning.\n2.  **Search for Similar Chunks:** The system then searches the **vector database**. It looks for the embeddings of stored chunks that are most similar to your question's embedding. This finds chunks with meanings closest to your question.\n3.  **Augment the Question:** The most relevant chunks found are then taken. These chunks are put together with your original question. This creates a new, enriched request for the LLM.\n4.  **Generate the Answer:** Finally, this combined information (your question + the relevant chunks) is given to the LLM. The LLM then uses this fresh, specific information to write its answer.\n\n## A Worked Example: Your College Rules\n\nLet's imagine you ask an LLM about a new rule at your college.\n\n1.  **Preparation:** The college's new digital rulebook is split into many small **chunks**. Each chunk (e.g., about \"attendance rules\") is turned into an **embedding**, which is a list of numbers showing its meaning. All these embeddings are stored in the college's **vector database**.\n2.  **You Ask:** You type, \"What is the new attendance rule for B.A. students?\"\n3.  **Retrieve:** Your question is turned into an embedding. The system searches the vector database. It finds chunks from the rulebook whose embeddings are most similar to your question. These will be chunks about \"attendance rules.\"\n4.  **Augment:** Your original question and the retrieved chunks about attendance rules are put together. This combined text is given to the LLM.\n5.  **Generate:** The LLM reads your question and the specific attendance rules from the rulebook. It then writes a clear answer. This answer is based on the real document. It's like the smart student receiving the exact page from the rulebook to answer your question.\n\n## Limits of RAG (K7)\n\nRAG is powerful, but it's not perfect:\n\n*   **Wrong Information:** If the system retrieves (finds) the wrong or outdated chunks from the documents, the LLM's answer can still be wrong.\n*   **Hallucination Still Possible:** RAG greatly reduces hallucination, but it does not remove it completely. The LLM might still make small mistakes.\n*   **Document Quality:** The quality of the LLM's answer depends on the quality of the documents you provide. If the documents are unclear or incomplete, the answer will reflect that.\n\n## Recap\n\nRAG, or Retrieval-Augmented Generation, helps LLMs give better answers. It first finds relevant information from external documents. Then, it adds this information to the question. Finally, the LLM writes an answer using this combined input. This makes LLMs more useful for current and private information.",
+      "evaluation": {
+        "passed": true,
+        "total": 14,
+        "n_passed": 14,
+        "failed_ids": [],
+        "results": [
+          {
+            "id": "structure",
+            "dimension": "covers_key_points",
+            "type": "code",
+            "passed": true,
+            "reason": "All required sections are present.",
+            "evidence": ""
+          },
+          {
+            "id": "length",
+            "dimension": "beginner_friendly",
+            "type": "code",
+            "passed": true,
+            "reason": "926 words, within range.",
+            "evidence": ""
+          },
+          {
+            "id": "sentence_length",
+            "dimension": "beginner_friendly",
+            "type": "code",
+            "passed": true,
+            "reason": "Average 10.3 words, longest 22.",
+            "evidence": ""
+          },
+          {
+            "id": "reading_ease",
+            "dimension": "beginner_friendly",
+            "type": "code",
+            "passed": true,
+            "reason": "Flesch Reading Ease is 62.",
+            "evidence": ""
+          },
+          {
+            "id": "long_words",
+            "dimension": "beginner_friendly",
+            "type": "code",
+            "passed": true,
+            "reason": "0.4% long words.",
+            "evidence": ""
+          },
+          {
+            "id": "acronym_expanded",
+            "dimension": "no_unexplained_jargon",
+            "type": "code",
+            "passed": true,
+            "reason": "Acronym is expanded at first use.",
+            "evidence": ""
+          },
+          {
+            "id": "jargon_defined",
+            "dimension": "no_unexplained_jargon",
+            "type": "code",
+            "passed": true,
+            "reason": "Every technical term is explained where it first appears.",
+            "evidence": ""
+          },
+          {
+            "id": "accurate_grounded",
+            "dimension": "accurate_grounded",
+            "type": "llm",
+            "passed": true,
+            "reason": "The lesson accurately reflects all facts from the fact sheet and introduces no unsupported specific claims.",
+            "evidence": "",
+            "evidence_verified": true
+          },
+          {
+            "id": "covers_key_points",
+            "dimension": "covers_key_points",
+            "type": "llm",
+            "passed": true,
+            "reason": "All seven key points (K1-K7) are clearly taught and explained in the lesson.",
+            "evidence": "",
+            "evidence_verified": true
+          },
+          {
+            "id": "teaches_by_example",
+            "dimension": "teaches_by_example",
+            "type": "llm",
+            "passed": true,
+            "reason": "The 'A Worked Example: Your College Rules' section provides a specific question and walks through the RAG steps to a specific type of answer.",
+            "evidence": "",
+            "evidence_verified": true
+          },
+          {
+            "id": "analogy_sound",
+            "dimension": "teaches_by_example",
+            "type": "llm",
+            "passed": true,
+            "reason": "The analogy of a 'smart student' receiving 'fresh, up-to-date notes' accurately explains RAG without implying false information like model retraining.",
+            "evidence": "",
+            "evidence_verified": true
+          },
+          {
+            "id": "jargon_explained",
+            "dimension": "no_unexplained_jargon",
+            "type": "llm",
+            "passed": true,
+            "reason": "All technical terms such as LLM, training data, hallucination, RAG, chunks, embedding, and vector database are explained in plain language upon their first use.",
+            "evidence": "",
+            "evidence_verified": true
+          },
+          {
+            "id": "coherent_flow",
+            "dimension": "coherent_flow",
+            "type": "llm",
+            "passed": true,
+            "reason": "The lesson follows a logical progression, introducing problems, then the solution (RAG), its benefits, mechanics, an example, and finally its limits.",
+            "evidence": "",
+            "evidence_verified": true
+          },
+          {
+            "id": "zero_background",
+            "dimension": "coherent_flow",
+            "type": "llm",
+            "passed": true,
+            "reason": "The lesson assumes no prior knowledge of AI, machine learning, coding, or mathematics, explaining all concepts from a beginner's perspective.",
+            "evidence": "",
+            "evidence_verified": true
+          }
+        ]
+      },
+      "changes": [
+        "**Fixed jargon definition:** At the first mention of \"Retrieval-Augmented Generation,\" I added a plain-words explanation for \"Retrieval\" in the same sentence: \"This is where RAG, which stands for Retrieval-Augmented Generation, comes in! **Retrieval** means finding or getting information.\" This ensures all parts of the RAG acronym are explained upon their first appearance.",
+        "**Fixed sentence length:** The long sentence about storing embeddings in a vector database was split into multiple shorter sentences. The original sentence (32 words) was: \"Store in Vector Database: These embeddings (the lists of numbers) are then stored in a special database, called a vector database, which is built to store and quickly find these number lists.\" It is now four sentences (15, 8, 15, 11 words), all well within the 25-word limit."
+      ],
+      "diff": {
+        "words_before": 1003,
+        "words_after": 1009,
+        "text_kept_pct": 98
+      },
+      "injected_error": ""
+    }
+  ]
+}
